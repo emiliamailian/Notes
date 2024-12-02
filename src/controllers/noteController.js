@@ -26,7 +26,6 @@ const getNotes = async (req, res) => {
   }
 };
 
-
 const getNoteById = async (req, res) => {
   const { id } = req.params;
 
@@ -73,9 +72,10 @@ const deleteNote = async (req, res) => {
       return res.status(404).json({ message: 'Note not found' });
     }
 
-    await note.remove(); 
+    await Note.findByIdAndDelete(); 
     res.status(200).json({ message: 'Note deleted' });
   } catch (error) {
+    console.error('Error deleting note:', error);
     res.status(400).json({ message: 'Error deleting note' });
   }
 };
