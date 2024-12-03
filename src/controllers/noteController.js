@@ -67,12 +67,11 @@ const deleteNote = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const note = await Note.findById(id);
+    const note = await Note.findByIdAndDelete(id);
     if (!note) {
       return res.status(404).json({ message: 'Note not found' });
     }
 
-    await Note.findByIdAndDelete(); 
     res.status(200).json({ message: 'Note deleted' });
   } catch (error) {
     console.error('Error deleting note:', error);
